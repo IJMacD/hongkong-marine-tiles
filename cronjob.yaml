@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hongkong-marine-tiles-download
+spec:
+  schedule: "0 0 * * sun"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hongkong-marine-tiles-download
+              image: ijmacd/hongkong-marine:1.0.1
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - mountPath: /mbtiles
+                  name: hongkong-marine-mbtiles
+                - mountPath: /tiles
+                  name: hongkong-marine-tiles
+          volumes:
+            - name: hongkong-marine-mbtiles
+              hostPath:
+                path: /var/www/ijmacd.com/hongkong-marine-mbtiles/
+            - name: hongkong-marine-tiles
+              hostPath:
+                path: /var/www/ijmacd.com/tiles/hongkong-marine/
+          restartPolicy: OnFailure
