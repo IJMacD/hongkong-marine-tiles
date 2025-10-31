@@ -10,8 +10,7 @@ spec:
         spec:
           containers:
             - name: hongkong-marine-tiles-download
-              image: ijmacd/hongkong-marine:1.0.1
-              imagePullPolicy: IfNotPresent
+              image: ijmacd/hongkong-marine:1.1.0
               volumeMounts:
                 - mountPath: /mbtiles
                   name: hongkong-marine-mbtiles

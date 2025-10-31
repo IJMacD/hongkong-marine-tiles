@@ -12,9 +12,7 @@ tiles_target_dir=${TILES_TARGET_DIR:-"/tiles"}
 # Don't create actual tiles_tmp_dir; mbutil complains
 mkdir -p $mbtiles_tmp_dir $(dirname $tiles_tmp_dir)
 
-device_id=$(openssl rand -hex 8)
-
-wget --no-verbose --content-disposition --directory-prefix=$mbtiles_tmp_dir "https://eseago.hydro.gov.hk/map_download.php?token=eseago&uid=$device_id&os=android"
+(cd $mbtiles_tmp_dir && python3 /usr/src/app/download.py)
 
 if [ ! -f $mbtiles_tmp_dir/*.mbtiles ]; then
     echo "[Error] Unable to download mbtiles file"
